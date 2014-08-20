@@ -6,10 +6,10 @@ This example demonstrates code factoring approaches to UICollectionViewDataSourc
 
 ### Build
 
-iOS 8 SDK
+iOS 6 SDK
 
 ### Runtime
 
-iOS 8
+iOS 6
 
 Copyright (C) 2014 Apple Inc. All rights reserved.

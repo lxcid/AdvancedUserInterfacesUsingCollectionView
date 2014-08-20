@@ -16,7 +16,11 @@
 
 @interface AAPLDataSource : NSObject <UICollectionViewDataSource, AAPLContentLoading>
 
+#ifdef NS_DESIGNATED_INITIALIZER
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
+#else
+- (instancetype)init; // Designated initializer
+#endif
 
 /// The title of this data source. This value is used to populate section headers and the segmented control tab.
 @property (nonatomic, copy) NSString *title;
