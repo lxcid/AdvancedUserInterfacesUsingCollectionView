@@ -12,4 +12,11 @@ iOS 6 SDK
 
 iOS 6
 
+## Issues
+
+### iOS 6 compatibility
+
+- `AAPLCollectionViewGridLayout` implements `- [UICollectionViewLayout invalidateLayoutWithContext:]` which is only available in iOS 7. So, it didn't implements `- [UICollectionViewLayout invalidateLayout]` for iOS 6 to function properly.
+- Some method uses iOS 7 features like `- [UIView setTintColor:]` and `- [UIImage imageWithRenderingMode:]`.
+
 Copyright (C) 2014 Apple Inc. All rights reserved.
