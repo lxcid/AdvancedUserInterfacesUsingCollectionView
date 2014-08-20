@@ -13,7 +13,11 @@
 
 @interface AAPLTextValueDataSource : AAPLDataSource
 
+#ifdef NS_DESIGNATED_INITIALIZER
 - (instancetype)initWithObject:(id)object NS_DESIGNATED_INITIALIZER;
+#else
+- (instancetype)initWithObject:(id)object; // Designated initializer
+#endif
 
 @property (nonatomic, copy) NSArray *items;
 

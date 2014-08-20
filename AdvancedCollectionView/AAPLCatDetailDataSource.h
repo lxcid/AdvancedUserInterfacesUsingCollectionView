@@ -14,6 +14,10 @@
 
 @interface AAPLCatDetailDataSource : AAPLComposedDataSource
 
+#ifdef NS_DESIGNATED_INITIALIZER
 - (instancetype)initWithCat:(AAPLCat *)cat NS_DESIGNATED_INITIALIZER;
+#else
+- (instancetype)initWithCat:(AAPLCat *)cat; // Designated initializer
+#endif
 
 @end

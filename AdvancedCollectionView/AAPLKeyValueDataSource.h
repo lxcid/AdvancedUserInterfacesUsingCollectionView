@@ -12,6 +12,10 @@
 
 @interface AAPLKeyValueDataSource : AAPLBasicDataSource
 
+#ifdef NS_DESIGNATED_INITIALIZER
 - (instancetype)initWithObject:(id)object NS_DESIGNATED_INITIALIZER;
+#else
+- (instancetype)initWithObject:(id)object; // Designated initializer
+#endif
 
 @end
