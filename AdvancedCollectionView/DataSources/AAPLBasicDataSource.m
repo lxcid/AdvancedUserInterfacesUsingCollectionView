@@ -102,7 +102,7 @@
     for (NSUInteger i = 0; i < count; ++i) {
         NSIndexPath *fromIndexPath = fromMovedIndexPaths[i];
         NSIndexPath *toIndexPath = toMovedIndexPaths[i];
-        if (fromIndexPath != nil && toIndexPath != nil)
+        if (fromIndexPath != nil && toIndexPath != nil && ![fromIndexPath isEqual:toIndexPath])
             [self notifyItemMovedFromIndexPath:fromIndexPath toIndexPaths:toIndexPath];
     }
 }
