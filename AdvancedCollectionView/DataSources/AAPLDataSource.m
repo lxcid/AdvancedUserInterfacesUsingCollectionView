@@ -16,11 +16,10 @@
 
 #define AAPL_ASSERT_MAIN_THREAD NSAssert([NSThread isMainThread], @"This method must be called on the main thread")
 
-@interface AAPLDataSource () <AAPLStateMachineDelegate>
+@interface AAPLDataSource ()
 @property (nonatomic, strong) NSMutableDictionary *sectionMetrics;
 @property (nonatomic, strong) NSMutableArray *headers;
 @property (nonatomic, strong) NSMutableDictionary *headersByKey;
-@property (nonatomic, strong) AAPLLoadableContentStateMachine *stateMachine;
 @property (nonatomic, strong) AAPLCollectionPlaceholderView *placeholderView;
 @property (nonatomic, copy) dispatch_block_t pendingUpdateBlock;
 @property (nonatomic) BOOL loadingComplete;
@@ -29,6 +28,7 @@
 
 @implementation AAPLDataSource
 @synthesize loadingError = _loadingError;
+@synthesize stateMachine = _stateMachine;
 
 - (instancetype)init
 {

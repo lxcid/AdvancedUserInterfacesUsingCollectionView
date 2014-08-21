@@ -23,7 +23,11 @@ typedef enum {
 
 
 
-@interface AAPLDataSource ()
+@interface AAPLDataSource () <AAPLStateMachineDelegate> {
+    @protected
+    AAPLLoadableContentStateMachine *_stateMachine;
+}
+
 - (AAPLCollectionPlaceholderView *)dequeuePlaceholderViewForCollectionView:(UICollectionView *)collectionView atIndexPath:(NSIndexPath *)indexPath;
 
 - (AAPLLayoutSectionMetrics *)snapshotMetricsForSectionAtIndex:(NSInteger)sectionIndex;
@@ -46,6 +50,9 @@ typedef enum {
 
 /// A delegate object that will receive change notifications from this data source.
 @property (nonatomic, weak) id<AAPLDataSourceDelegate> delegate;
+
+/// A state machine for managing loading of content.
+@property (nonatomic, strong) AAPLLoadableContentStateMachine *stateMachine;
 
 - (void)notifySectionsInserted:(NSIndexSet *)sections direction:(AAPLDataSourceSectionOperationDirection)direction;
 - (void)notifySectionsRemoved:(NSIndexSet *)sections direction:(AAPLDataSourceSectionOperationDirection)direction;
