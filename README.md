@@ -19,4 +19,9 @@ iOS 6
 - `AAPLCollectionViewGridLayout` implements `- [UICollectionViewLayout invalidateLayoutWithContext:]` which is only available in iOS 7. So, it didn't implements `- [UICollectionViewLayout invalidateLayout]` for iOS 6 to function properly.
 - Some method uses iOS 7 features like `- [UIView setTintColor:]` and `- [UIImage imageWithRenderingMode:]`.
 
+### Limitations
+
+- State machine does not support pagination.
+- No public way to extends content loading state machine.
+
 Copyright (C) 2014 Apple Inc. All rights reserved.
