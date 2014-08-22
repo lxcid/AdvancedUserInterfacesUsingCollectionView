@@ -166,20 +166,24 @@
     self.loadingState = state;
 
     if (self.shouldDisplayPlaceholder) {
-        if (update)
+        if (update) {
             [self enqueuePendingUpdateBlock:update];
+        }
+        self.loadingComplete = YES;
+        [self notifyContentLoadedWithError:error];
     }
     else {
         [self notifyBatchUpdate:^{
             // Run pending updates
             [self executePendingUpdates];
-            if (update)
+            if (update) {
                 update();
+            }
+        } complete:^{
+            self.loadingComplete = YES;
+            [self notifyContentLoadedWithError:error];
         }];
     }
-
-    self.loadingComplete = YES;
-    [self notifyContentLoadedWithError:error];
 }
 
 - (void)setNeedsLoadContent
