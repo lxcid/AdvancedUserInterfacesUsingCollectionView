@@ -174,6 +174,7 @@
         // Use to enqueue the update block, but because this signify the end of loading,
         // the update block will not get a chance to be executed. Which goes against
         // what is described in the comment.
+        [self executePendingUpdates];
         if (update) {
             update();
         }
