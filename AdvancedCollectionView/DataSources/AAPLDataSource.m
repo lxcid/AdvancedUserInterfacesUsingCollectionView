@@ -164,13 +164,20 @@
 {
     self.loadingError = error;
     self.loadingState = state;
-
-    if (self.shouldDisplayPlaceholder) {
-        if (update) {
-            [self enqueuePendingUpdateBlock:update];
-        }
+    
+    dispatch_block_t complete = ^{
         self.loadingComplete = YES;
         [self notifyContentLoadedWithError:error];
+    };
+    
+    if (self.shouldDisplayPlaceholder) {
+        // Use to enqueue the update block, but because this signify the end of loading,
+        // the update block will not get a chance to be executed. Which goes against
+        // what is described in the comment.
+        if (update) {
+            update();
+        }
+        complete();
     }
     else {
         [self notifyBatchUpdate:^{
@@ -179,10 +186,7 @@
             if (update) {
                 update();
             }
-        } complete:^{
-            self.loadingComplete = YES;
-            [self notifyContentLoadedWithError:error];
-        }];
+        } complete:complete];
     }
 }
 
