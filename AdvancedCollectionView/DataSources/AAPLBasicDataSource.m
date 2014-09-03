@@ -241,4 +241,15 @@
     [self notifyItemMovedFromIndexPath:indexPath toIndexPaths:destinationIndexPath];
 }
 
+#pragma mark - UITableViewDataSource methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (self.obscuredByPlaceholder) {
+        return 0;
+    }
+    
+    return [_items count];
+}
+
 @end

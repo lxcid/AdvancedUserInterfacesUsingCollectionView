@@ -14,7 +14,7 @@
 
 @class AAPLCollectionPlaceholderView;
 
-@interface AAPLDataSource : NSObject <UICollectionViewDataSource, AAPLContentLoading>
+@interface AAPLDataSource : NSObject <UICollectionViewDataSource, UITableViewDataSource, AAPLContentLoading>
 
 #ifdef NS_DESIGNATED_INITIALIZER
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -115,6 +115,9 @@
 
 /// Register reusable views needed by this data source
 - (void)registerReusableViewsWithCollectionView:(UICollectionView *)collectionView NS_REQUIRES_SUPER;
+
+/// Register cells needed by this data source
+- (void)registerCellsWithTableView:(UITableView *)tableView NS_REQUIRES_SUPER;
 
 /// Signal that the datasource SHOULD reload its content
 - (void)setNeedsLoadContent;

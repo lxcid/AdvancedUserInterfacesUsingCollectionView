@@ -792,4 +792,45 @@
     return view;
 }
 
+#pragma mark - UITableView
+
+- (void)registerCellsWithTableView:(UITableView *)tableView
+{
+    NSInteger numberOfSections = self.numberOfSections;
+    
+    AAPLLayoutSectionMetrics *globalMetrics = [self snapshotMetricsForSectionAtIndex:AAPLGlobalSection];
+    for (AAPLLayoutSupplementaryMetrics* headerMetrics in globalMetrics.headers) {
+        [tableView registerClass:headerMetrics.supplementaryViewClass forHeaderFooterViewReuseIdentifier:headerMetrics.reuseIdentifier];
+    }
+    
+    for (NSInteger sectionIndex = 0; sectionIndex < numberOfSections; ++sectionIndex) {
+        AAPLLayoutSectionMetrics *metrics = [self snapshotMetricsForSectionAtIndex:sectionIndex];
+        
+        for (AAPLLayoutSupplementaryMetrics* headerMetrics in metrics.headers) {
+            [tableView registerClass:headerMetrics.supplementaryViewClass  forHeaderFooterViewReuseIdentifier:headerMetrics.reuseIdentifier];
+        }
+        for (AAPLLayoutSupplementaryMetrics* footerMetrics in metrics.footers) {
+            [tableView registerClass:footerMetrics.supplementaryViewClass forHeaderFooterViewReuseIdentifier:footerMetrics.reuseIdentifier];
+        }
+    }
+}
+
+#pragma mark - UITableViewDataSource methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSAssert(NO, @"Should be implemented by subclasses");
+    return nil;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.numberOfSections;
+}
+
 @end

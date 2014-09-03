@@ -481,4 +481,31 @@ NSString * const AAPLSegmentedDataSourceHeaderKey = @"AAPLSegmentedDataSourceHea
     [self notifyWillLoadContent];
 }
 
+#pragma mark - UITableView
+
+- (void)registerCellsWithTableView:(UITableView *)tableView {
+    [super registerCellsWithTableView:tableView];
+    
+    for (AAPLDataSource *dataSource in self.dataSources) {
+        [dataSource registerCellsWithTableView:tableView];
+    }
+}
+
+#pragma mark - UITableViewDataSource methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.shouldDisplayPlaceholder) {
+        return 0;
+    }
+    return [self.selectedDataSource tableView:tableView numberOfRowsInSection:section];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [self.selectedDataSource tableView:tableView cellForRowAtIndexPath:indexPath];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [self.selectedDataSource numberOfSectionsInTableView:tableView];
+}
+
 @end
